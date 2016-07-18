@@ -1,0 +1,12 @@
+Source: ros-indigo-nav-pcontroller
+Section: misc
+Priority: extra
+Maintainer: Jan Winkler <winkler@cs.uni-bremen.de>
+Build-Depends: debhelper (>= 9.0.0), ros-indigo-actionlib, ros-indigo-catkin, ros-indigo-geometry-msgs, ros-indigo-move-base-msgs, ros-indigo-roscpp, ros-indigo-roslib, ros-indigo-sensor-msgs, ros-indigo-std-msgs, ros-indigo-tf, ros-indigo-visualization-msgs
+Homepage: https://www.github.com/code-iai/nav_pcontroller
+Standards-Version: 3.9.2
+
+Package: ros-indigo-nav-pcontroller
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-indigo-actionlib, ros-indigo-geometry-msgs, ros-indigo-move-base-msgs, ros-indigo-roscpp, ros-indigo-roslib, ros-indigo-sensor-msgs, ros-indigo-std-msgs, ros-indigo-tf, ros-indigo-visualization-msgs
+Description: Simple P-Controller for a holonomic robot base
