@@ -1,0 +1,23 @@
+actions: []
+authors: Ingo Kresse
+brief: ''
+bugtracker: ''
+depends:
+- catkin
+- roscpp
+- sensor_msgs
+- actionlib
+- roslib
+- std_msgs
+- move_base_msgs
+- geometry_msgs
+- visualization_msgs
+- tf
+description: Simple P-Controller for a holonomic robot base
+license: BSD
+maintainers: Jan Winkler <winkler@cs.uni-bremen.de>
+msgs: []
+package_type: package
+repo_url: ''
+srvs: []
+url: https://www.github.com/code-iai/nav_pcontroller
