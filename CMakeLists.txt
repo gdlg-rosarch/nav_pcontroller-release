@@ -27,3 +27,9 @@ install(TARGETS ${PROJECT_NAME} speed_filter
 install(DIRECTORY include/${PROJECT_NAME}/
   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
+
+install(FILES launch/pr2_nav_pcontroller.launch
+              launch/boxy_nav_pcontroller.launch
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
+)
+

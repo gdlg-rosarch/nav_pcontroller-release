@@ -90,6 +90,8 @@ private:
   double x_now_, y_now_, th_now_;
   bool goal_set_, keep_distance_;
 
+  double laser_watchdog_timeout_;
+
   std::string global_frame_;
   std::string base_link_frame_;
 
