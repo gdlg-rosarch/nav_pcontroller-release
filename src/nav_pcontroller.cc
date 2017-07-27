@@ -122,7 +122,10 @@ void BasePController::parseParams()
   n_.param(stName + "/footprint/front", front, 0.43);
   n_.param(stName + "/footprint/rear", rear, -0.43);
   n_.param(stName + "/footprint/tolerance", tolerance, 0.0);
+
   
+  n_.param<double>("laser_watchdog_timeout", laser_watchdog_timeout_, 0.2);
+
   dist_control_.setFootprint(front, rear, left, right, tolerance);
 }
 
@@ -251,6 +254,11 @@ void BasePController::cycle()
   boost::mutex::scoped_lock curr_lock(lock);
 
   if(!retrieve_pose()) {
+    stopRobot();
+    return;
+  }
+
+  if ( !dist_control_.fresh_scans(laser_watchdog_timeout_) ) {
     stopRobot();
     return;
   }
