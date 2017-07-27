@@ -1,0 +1,12 @@
+Source: ros-lunar-nav-pcontroller
+Section: misc
+Priority: extra
+Maintainer: Alexis Maldonado <amaldo@cs.uni-bremen.de>
+Build-Depends: debhelper (>= 9.0.0), ros-lunar-actionlib, ros-lunar-catkin, ros-lunar-geometry-msgs, ros-lunar-move-base-msgs, ros-lunar-roscpp, ros-lunar-roslib, ros-lunar-sensor-msgs, ros-lunar-std-msgs, ros-lunar-tf, ros-lunar-visualization-msgs
+Homepage: https://www.github.com/code-iai/nav_pcontroller
+Standards-Version: 3.9.2
+
+Package: ros-lunar-nav-pcontroller
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-lunar-actionlib, ros-lunar-geometry-msgs, ros-lunar-move-base-msgs, ros-lunar-roscpp, ros-lunar-roslib, ros-lunar-sensor-msgs, ros-lunar-std-msgs, ros-lunar-tf, ros-lunar-visualization-msgs
+Description: Simple P-Controller for a holonomic robot base
