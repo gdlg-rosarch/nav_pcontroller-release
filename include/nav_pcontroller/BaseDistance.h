@@ -110,6 +110,13 @@ public:
    */
   void setSafetyLimits(double safety_dist, double slowdown_near, double slowdown_far, double rate);
 
+
+  /**
+   * @brief Check if the laser scans are older than a certain timeout, to use with a watchdog.
+   */
+  bool fresh_scans(double watchdog_timeout);
+
+
   /**
    * @brief Computes the translation and rotation from one frame to another
    * @param[in] from The name of the parent frame
@@ -150,6 +157,13 @@ public:
 private:
 
   std::string odom_frame_, base_link_frame_;
+
+  /**
+   * @brief Stores the last time when we received laser messages 
+   */
+  ros::Time laser_0_last_msg_time_;
+  ros::Time laser_1_last_msg_time_;
+
 
   /**
    * @brief d_ duration of one time frame, i.e. dt or Tdot
