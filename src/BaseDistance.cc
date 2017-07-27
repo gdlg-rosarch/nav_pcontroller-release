@@ -73,6 +73,7 @@ BaseDistance::BaseDistance()
   d_ = 1 / 10.0;
   rob_x_ = rob_y_ = rob_th_ = 0.0;
   vx_last_ = vy_last_ = vth_last_ = 0.0;
+  
 
   n_.param<std::string>("odom_frame", odom_frame_, "odom");
   n_.param<std::string>("base_link_frame", base_link_frame_, "base_link");
@@ -90,7 +91,7 @@ BaseDistance::BaseDistance()
   n_.param("blind_spot_threshold", blind_spot_threshold_, 0.85);
   n_.param("marker_size", marker_size_, 0.1);
 
-  marker_pub_ = n_.advertise<visualization_msgs::Marker>("/visualization_marker", 0);
+  marker_pub_ = n_.advertise<visualization_msgs::Marker>("visualization_marker", 0);
   laser_points_pub_ = n_.advertise<sensor_msgs::PointCloud>("laser_points", 0);
   debug_pub_ = n_.advertise<std_msgs::Float64MultiArray>("debug_channels", 0);
 
@@ -101,6 +102,29 @@ BaseDistance::BaseDistance()
         ("laser_2", 2, boost::bind(&BaseDistance::laserCallback, this, 1, _1));
 
   calculateEarlyRejectDistance();
+}
+
+
+bool BaseDistance::fresh_scans(double watchdog_timeout)
+{
+
+  ros::Time now = ros::Time::now();
+  if (n_lasers_ == 1) {
+    if (now - laser_0_last_msg_time_ < ros::Duration(watchdog_timeout))
+      return true;
+    else
+      return false;
+  }
+
+  if (n_lasers_ == 2) {
+    if ( (now - laser_0_last_msg_time_ < ros::Duration(watchdog_timeout)) 
+     and (now - laser_1_last_msg_time_ < ros::Duration(watchdog_timeout)) )
+      return true;
+    else
+      return false;
+  }
+
+
 }
 
 
@@ -244,6 +268,13 @@ void BaseDistance::laserCallback(int index, const sensor_msgs::LaserScan::ConstP
     }
     //// publishPoints(blind_spots_);
   }
+
+  if (index == 0) {
+    laser_0_last_msg_time_ = ros::Time(scan->header.stamp);
+  } else if (index == 1) {
+    laser_1_last_msg_time_ = ros::Time(scan->header.stamp);;
+  }
+
 }
 
 
